@@ -38,19 +38,12 @@ public class Cuenta {
 		
 	}
 	
-	public double addGastos (String description, double cantidad) {
-		try{
-			this.saldo = this.saldo - cantidad;
-						
-			if(this.getSaldo()<0) {
+	public double addGastos (String description, double cantidad) throws GastoException{
+			double saldoProvisional = saldo - cantidad;
+			if(saldoProvisional<0) {
 				throw new GastoException();
 			}
-		}
-		
-		catch (GastoException error) {
-			System.out.println(error.getMessage());
-		}
-		
+
 		Gasto nuevoGasto = new Gasto (cantidad, description);{
 		this.gastos.add(nuevoGasto);
 		return saldo;
@@ -65,6 +58,6 @@ public class Cuenta {
 	}
 	@Override
 	public String toString() {
-		return  "Usuario: " + usuario.getNombre() +  " Saldo: " + this.saldo +"€";
+		return  "Usuario: " + usuario.getNombre() +  " Saldo: " + this.saldo +"ï¿½";
 	}
 }
